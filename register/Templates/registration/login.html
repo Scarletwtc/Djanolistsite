@@ -1,0 +1,28 @@
+<style type="text/css">
+    .btn-custom {
+        background-color: #6d185f !important;
+        border-color: #6d185f !important;
+        color: white !important;
+    }
+    .btn-custom:hover {
+        background-color: #f0dfed !important;
+        border-color: #5a134b !important;
+        color: #6d185f !important;
+    }
+  
+</style>
+
+{% extends "main/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} Login {% endblock %}
+
+{% block contentlog %}
+    <form method="post" class="form-group" >
+        {% csrf_token %}
+        {{ form|crispy }}
+        <p>Don't have an account? Create one <a href="{% url 'register' %}">here</a></p>
+        <button type="submit" class="btn btn-custom">Login</button>
+    </form>
+{% endblock %}
+

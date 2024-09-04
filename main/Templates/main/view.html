@@ -1,0 +1,87 @@
+<style type="text/css">
+    #viewpag{
+        color: #6d185f;
+        font-size: 50px;
+        text-align: justify;
+        margin-left: 20px;
+        padding-left: 5px;
+    }
+    p{
+        color:#6d185f ;
+        font-size: 20px;
+        text-align: justify;
+    }
+    .item-box {
+        border: 2px solid #6d185f;
+        padding: 10px;
+        margin: 20px auto;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        text-align: center;
+        width: 80%;
+        transition: background-color 0.3s;
+    }
+    .item-box:hover {
+        background-color: #6d185f;
+    }
+    .item-box:hover #items a {
+        color: #e8dfe6;
+    }
+    
+    #items {
+        text-align: center; /* Ensure paragraph text is centered */
+    }
+    #items a {
+        color: #6d185f;
+        font-size: 20px;
+        transition: color 0.3s;
+    }
+    #items a:hover{
+        color: #e8dfe6;   
+    }
+    .item-box:hover .btn-custom {
+        background-color: #e8dfe6;
+        color: #6d185f;
+        border-color: #6d185f;
+    }
+    .btn-custom {
+        display: inline-block;
+        margin-bottom: 0%;
+        border: 1px solid #6d185f;
+        border-radius: 3px;
+        background-color: #e8dfe6;
+        color: #6d185f;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .btn-custom:hover {
+        background-color: #dcd7db;
+        color: #e8dfe6;
+        border-color: #e8dfe6;
+    }
+    
+</style>
+{% extends 'main/base.html' %}
+{% block title %}
+View
+{%endblock%}
+
+
+{% block content %}
+<h1 id="viewpag" class="mt-2">Your created lists: </h1>
+<hr class="mt-0 mb-4" style="color: #6d185f;">
+    {% for td in user.todolist.all %}
+        <div class="item-box input-group-prepend">
+            <p id="items"><a href="/{{ td.id }}">{{ td.name }}</a></p>
+            <hr>
+            <form method="POST" action="{% url 'delete' %}" class="form-group">
+                {% csrf_token %}
+                <input type="hidden" name="list_to_delete" value="{{ td.id }}">
+                <button class="btn btn-custom" style="color: #6d185f;" type="submit">Delete</button>
+            </form>
+        </div>
+    {% endfor %}
+{%endblock%}

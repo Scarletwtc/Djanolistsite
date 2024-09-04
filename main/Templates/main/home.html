@@ -1,0 +1,24 @@
+<style type="text/css">
+    #homepag{
+        color: #6d185f;
+        font-size: 50px;
+        text-align: justify;
+        margin-left: 20px;
+        padding-left: 5px;
+    }
+    p{
+        color: #0c0c0c;
+        font-size: 20px;
+        text-align: justify;
+        margin-left: 20px;
+        padding-left: 5px;
+    }
+</style>
+{% extends 'main/base.html' %}
+{% block title %} home {% endblock %}
+{%block content %}
+<h1 id="homepag" class="mt-2">Home Page </h1>
+<hr class="mt-0 mb-4" style="color: #6d185f;">
+<p>Welcome back {{user.username}}!</p>
+<p> This is a site where you can create lists and add items to them. </p>
+{% endblock %}

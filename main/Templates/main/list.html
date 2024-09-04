@@ -1,0 +1,71 @@
+<style type="text/css">
+    #listpag{
+        color: #6d185f;
+        font-size: 50px;
+        text-align: justify;
+        margin-left: 20px;
+        padding-left: 5px;
+    }
+    .btn-custom {
+        background-color: #6d185f !important;
+        border-color: #6d185f !important;
+        color: white !important;
+    }
+    .btn-custom:hover {
+        background-color: #f0dfed !important;
+        border-color: #5a134b !important;
+        color: #6d185f !important;
+    }
+    .gg {
+        margin-left: 20px;
+        padding-left: 5px;
+    }
+    .form-container {
+        margin: 0 auto; /* Center the container */
+        width: 80%; /* Adjust as needed */
+        padding-left: 30px; /* Adds space on the left */
+    }
+    .input-group {
+        text-align: center; /* Centers the content inside input groups */
+    }
+    .input-group .form-control {
+        text-align: center; /* Centers text inside form controls */
+    }
+    #lists {
+        margin-left: 40px;
+    }
+</style>
+{% extends "main/base.html" %}
+
+{% block title%} View list {%endblock%}
+
+{% block content %}
+    <h1 id="listpag">{{ls.name}}</h1>
+    <hr class="mt-0 mb-4" style="color: #6d185f;">
+    <form method="POST" action="#" class="gg"> 
+        {% csrf_token%}   
+        
+            {% for item in ls.item_set.all  %}
+            <div class="input-group mb-3" id="lists">
+                <div class="input-group-text">
+                <div class="input-group-prepend">
+                {% if item.complete == True %}
+                    <input type="checkbox", value="clicked", name="c{{item.id}}" checked>
+                    {% else %}
+                   <input type="checkbox", value="clicked", name="c{{item.id}}" > 
+                {% endif %}
+                </div>
+                <input type="text", value="{{item.text}}" class="form-control">
+            </div>
+            </div>    
+            {% endfor %}
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button type="submit", name="save", value="save" class="btn btn-custom">Save </button>
+                <input type="text", name="new" >
+                <button type="submit", name="newItem", value="newItem" class="btn btn-custom">New item </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
